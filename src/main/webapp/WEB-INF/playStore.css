@@ -1,0 +1,42 @@
+h1 {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1.1em;
+	font-weight: normal;
+	color: SeaGreen;
+	margin: 1em 1em 1em 1em;
+}
+h2{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1.1em;
+	font-weight: normal;
+	color: blue;
+	margin: 1em 1em 1em 1em;
+}
+
+a {
+	color: DarkSlateGray;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+a:hover {
+	color: OrangeRed;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+table{
+	margin: 0em 0em 1em 2em;
+	background: WhiteSmoke;
+	border-collapse: collapse;
+	color: DarkSlateGray;
+	background: Gainsboro;
+	text-align: left;
+	border: 1px Silver solid;
+	padding: 0.2em;
+}
+
+.errors {
+	color: Red;
+	font-weight: bold;
+}
