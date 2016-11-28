@@ -51,7 +51,7 @@ public class RedisImpl{
 		/*String packagecon = gson.toJson(relatedPackage);*/
 		List<String> jsonData = redisConnect.hmget("Game Key:" + info.getBaseGameId().substring(0, 3),
 				info.getBaseGameId());
-		System.out.println("json List" + jsonData.get(0));
+		/*System.out.println("json List" + jsonData.get(0));*/
 
 		Set<String> recordSet = new HashSet<String>();
 		if (jsonData.get(0) != null) {
@@ -69,7 +69,7 @@ public class RedisImpl{
 	public static void addData(Set<String> record, String baseGameId, String packageId) {
 
 		record.add(packageId);
-		System.out.println("recod:-" + record.toString());
+	/*	System.out.println("recod:-" + record.toString());*/
 		String packageIdString = null;
 		packageIdString = gson.toJson(record);
 		redisConnect.hset("Game Key:" + baseGameId.substring(0, 3), baseGameId, packageIdString);

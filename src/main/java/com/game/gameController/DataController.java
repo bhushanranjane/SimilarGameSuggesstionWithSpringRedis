@@ -32,17 +32,18 @@ public class DataController {
 	PlayStoreUrlFetching gameUrl = new PlayStoreUrlFetching();
 	PlayStoreDataFetching gameData = new PlayStoreDataFetching();
 	PlayStoreGameSuggesstion suggestGame = new PlayStoreGameSuggesstion();
-	GameInfo gameInfo = new GameInfo();
+	
 
-	SuggestInfo suggestion1 = new SuggestInfo();
+	/*SuggestInfo suggestion1 = new SuggestInfo();*/
 	/* ArrayList<String> gamelist=new ArrayList<String>(); */
 
 	@Autowired
 	GameSuggestionDaoImpl gameDao;
-	RedisImpl redisImpl;
+	
 
 	@RequestMapping(value = "homepage", method = RequestMethod.POST)
 	public ModelAndView gameDetails(String gameName) {
+		/*GameInfo gameInfo = new GameInfo();*/
 		System.out.println("Search Here" + gameName);
 		if(gameName.equals("")){
 			return new ModelAndView("error");
@@ -60,7 +61,7 @@ public class DataController {
 
 		} else {
 			String url = gameUrl.findUrl(gameName);
-			gameInfo = gameData.getPlaystoreData(url);
+			GameInfo gameInfo = gameData.getPlaystoreData(url);
 			gameDao.saveGame(gameInfo);
 			List<GameInfo> game = gameDao.getGameByName(gameName);
 			List<SuggestInfo> suggestion = suggestGame.getGameSuggesstion(game.get(0));

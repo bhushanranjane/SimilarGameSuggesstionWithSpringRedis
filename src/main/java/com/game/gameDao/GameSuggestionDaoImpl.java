@@ -19,7 +19,7 @@ import redis.clients.jedis.Jedis;
 
 
 
-@Repository
+
 public class GameSuggestionDaoImpl implements GameSuggestionDao {
 	Logger logger=Logger.getLogger(GameSuggestionDaoImpl.class);
 	static final Jedis redisConnect=new Jedis("localhost");
@@ -42,8 +42,7 @@ public class GameSuggestionDaoImpl implements GameSuggestionDao {
 			return false;
 		}*/
 		}catch(Exception e){
-			
-			logger.info("Game Name Should not be blank");
+			logger.info("Game Already Exist");
 		}
 		finally {
 			session.close();
@@ -51,15 +50,15 @@ public class GameSuggestionDaoImpl implements GameSuggestionDao {
 		}
 		return false;
 	}
+	
+	
 
 	// get the game details by the game name
 	@Transactional
 	public List<GameInfo> getGameByName(String gameName) {
 		// Session Started
-		/*GameInfo gameInfo = new GameInfo();*/
-
+		
 		session = sessionFactory.openSession();
-
 		Query query = session.createQuery("from GameInfo where gameName= :gameName");
 		query.setParameter("gameName", gameName);
 		// GameInfo gameInfo1=(GameInfo) query.uniqueResult();

@@ -2,10 +2,12 @@ package com.game.gameDao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.game.gameDto.GameInfo;
 
 
-
+@Repository
 public interface GameSuggestionDao 
 {
 	public boolean isExist(String gname);
