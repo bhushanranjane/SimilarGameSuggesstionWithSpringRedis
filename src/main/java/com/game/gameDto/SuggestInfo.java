@@ -1,10 +1,15 @@
+/*
+  File name:SuggestInfo.java
+  Created by:Bhushan Ranjane
+  Purpose:Model Class for Game Suggestion  Information.
+*/
 package com.game.gameDto;
 
 import java.io.Serializable;
 
-public class SuggestInfo implements Serializable {
+public class SuggestInfo /*implements Serializable*/ {
 	
-	private static final long serialVersionUID = -8243145429438016231L;
+	//private static final long serialVersionUID = -8243145429438016231L;
 	
 	private int sequenceId;
 

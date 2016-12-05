@@ -1,3 +1,8 @@
+/*
+  File name:GameInfo.java
+  Created by:Bhushan Ranjane
+  Purpose:Model Class for Game Information.
+*/
 package com.game.gameDto;
 
 import javax.persistence.Column;
@@ -29,6 +34,9 @@ public class GameInfo {
 
 	@Column
 	private String paid;
+	
+	@Column
+	private String imageUrl;
 
 	public String getPackageId() {
 		return packageId;
@@ -78,17 +86,11 @@ public class GameInfo {
 		this.gameName = gameName;
 	}
 
-	public GameInfo() {
-
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public GameInfo(String gameName, String packageId, String packageName, String gameCategory, String gameURL,
-			String paid) {
-		setGameName(gameName);
-		setPackageId(packageId);
-		setGameCategory(gameCategory);
-		setGameURL(gameURL);
-		setPackageName(packageName);
-		setPaid(paid);
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }

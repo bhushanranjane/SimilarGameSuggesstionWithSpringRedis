@@ -1,7 +1,11 @@
+/*
+  File name:GameSuggestionDaoImpl.java
+  Created by:Bhushan Ranjane
+  Purpose:Implements DOA for database operations.
+*/
 package com.game.gameDao;
 
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -9,11 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.game.gameDto.GameInfo;
-import com.game.gameDto.SuggestInfo;
 
 import redis.clients.jedis.Jedis;
 
@@ -21,7 +23,7 @@ import redis.clients.jedis.Jedis;
 
 
 public class GameSuggestionDaoImpl implements GameSuggestionDao {
-	Logger logger=Logger.getLogger(GameSuggestionDaoImpl.class);
+	Logger logger=Logger.getLogger("GAMESUGGESTIONDAOIMPL");
 	static final Jedis redisConnect=new Jedis("localhost");
 	
 	@Autowired
@@ -83,7 +85,7 @@ public class GameSuggestionDaoImpl implements GameSuggestionDao {
 
 	}
 
-	// save the game details fetched from the playstore
+	// save the game details fetched from the play store
 	@Transactional
 	public void saveGame(GameInfo gameInfo) {
 		session = sessionFactory.openSession();

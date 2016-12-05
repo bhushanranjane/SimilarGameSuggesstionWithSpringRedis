@@ -1,3 +1,8 @@
+/*
+  File name:RedisImpl.java
+  Created by:Bhushan Ranjane
+  Purpose:Perform Redis implementation operation
+*/
 package com.game.gameDao;
 
 import java.util.HashMap;
@@ -6,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.stereotype.Repository;
+import org.apache.log4j.Logger;
 
 import com.game.gameDto.SuggestInfo;
 import com.game.gameModel.PlayStoreDataFetching;
@@ -16,15 +20,17 @@ import com.google.gson.reflect.TypeToken;
 
 import redis.clients.jedis.Jedis;
 
-@Repository
-public class RedisImpl{
 
+public class RedisImpl implements RedisInterface{
+
+	Logger logger=Logger.getLogger("REDISIMPL");
 	PlayStoreDataFetching playStoreDataFetching = new PlayStoreDataFetching();	
 	final static Jedis redisConnect = new Jedis("localhost");
 	static Gson gson = new Gson();
 
 	public void redisData(SuggestInfo info) {
 		
+		//Stores the Suggested Data in Key Value Pair
 		Map<String, String> similarGames = new HashMap<String, String>();
 		
 		similarGames.put("Gamename", info.getGameName());
@@ -44,11 +50,7 @@ public class RedisImpl{
 		redisConnect.hset("GameId:-" + baseGameId, "Package Id:-" + info.getPackageid(),
 				"Game Suggestion:-" + suggestedGames.toString());
 
-	/*	// Storing related game related package id in json
-		Set<String> relatedPackage = new HashSet<String>();
-		relatedPackage.add(info.getPackageid());*/
-
-		/*String packagecon = gson.toJson(relatedPackage);*/
+	
 		List<String> jsonData = redisConnect.hmget("Game Key:" + info.getBaseGameId().substring(0, 3),
 				info.getBaseGameId());
 		/*System.out.println("json List" + jsonData.get(0));*/
@@ -66,13 +68,20 @@ public class RedisImpl{
 	}
 
 	//add data into hash set
-	public static void addData(Set<String> record, String baseGameId, String packageId) {
+	public void addData(Set<String> record, String baseGameId, String packageId) {
 
 		record.add(packageId);
-	/*	System.out.println("recod:-" + record.toString());*/
 		String packageIdString = null;
 		packageIdString = gson.toJson(record);
 		redisConnect.hset("Game Key:" + baseGameId.substring(0, 3), baseGameId, packageIdString);
+	}
+	
+	public String toJson(SuggestInfo info)
+	{
+		String data=redisConnect.hget("Game Key:" + info.getBaseGameId().substring(0, 3),
+				info.getBaseGameId());
+		return data;
+		
 	}
 
 }

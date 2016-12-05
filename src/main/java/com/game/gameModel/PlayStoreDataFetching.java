@@ -1,3 +1,9 @@
+/*
+  file name:PlayStoreDataFetching.java
+  Created by:Bhushan Ranjane
+  Purpose:Scrapping of Google Play Store Game Data.
+*/
+
 package com.game.gameModel;
 
 import java.io.IOException;
@@ -13,19 +19,19 @@ import com.game.gameDto.GameInfo;
 
 public class PlayStoreDataFetching {
 
-	Logger logger=Logger.getLogger(PlayStoreDataFetching.class);
+	Logger logger=Logger.getLogger("DATAFETCHING");
 	PlayStoreUrlFetching playStoreUrl = new PlayStoreUrlFetching();
 	GameInfo gameInfo = new GameInfo();
 
 	public GameInfo getPlaystoreData(String url) {
 
-		String title;
-		String packName ;
-		String catInfo;
-		String packageId;
-		String gameUrl;
-		String cost;
-		String charge ;
+		String title;//Game title
+		String packName ;//Game package name
+		String catInfo;//Game Category info
+		String packageId;//Game Package Id
+		String gameUrl;//Game url
+		String cost;//Game Cost
+		String imgurl="";
 		
 
 		try {
@@ -51,11 +57,20 @@ public class PlayStoreDataFetching {
 			packageId = Integer.toString(packName.hashCode() & Integer.MAX_VALUE);
 
 			// get the url of the game
-			gameUrl = url;			
+			gameUrl = url;	
+			
+			String iurl = doc.getElementsByClass("id-track-partial-impression").select("[class=cover-container]")
+					.toString();
+			imgurl = iurl.substring(iurl.indexOf("src") + 5, iurl.indexOf("alt") - 2);
+
+			// Append https to the image url
+			if (imgurl.contains("https") == false) {
+				imgurl = ("https:").concat(imgurl.trim());
+			}
 
 			//get the cost of the game
 			Elements status = doc.getElementsByClass("id-track-impression");
-			charge = status.text();
+			String charge = status.text();
 			
 			
 			//set the values game information
@@ -64,6 +79,7 @@ public class PlayStoreDataFetching {
 			gameInfo.setGameCategory(catInfo);
 			gameInfo.setPackageId(packageId);
 			gameInfo.setGameURL(gameUrl);
+			gameInfo.setImageUrl(imgurl);
 				
 			//if the game is having charges
 			if (charge.startsWith("₹")) {
@@ -84,12 +100,21 @@ public class PlayStoreDataFetching {
 				System.out.println("game category:-" + gameInfo.getGameCategory());
 				System.out.println("game url:-" + gameInfo.getGameURL());
 				System.out.println("Paid/Unpaid:-" + gameInfo.getPaid());
+				System.out.println("image url:-"+gameInfo.getImageUrl());
 
 			}
 
-		} catch (Exception e) {
+		} catch (IOException e) {
+			try{
+				Thread.sleep(1000);
+			}
+			catch(Exception e1){
+				e1.printStackTrace();
+			}
+			PlayStoreDataFetching psdf=new PlayStoreDataFetching();
+			psdf.getPlaystoreData(url);
 
-			logger.info("Game Name Not Found");
+			
 		}
 		return gameInfo;
 	}

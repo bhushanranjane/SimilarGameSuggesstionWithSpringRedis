@@ -1,3 +1,8 @@
+/*
+  File name:PlayStoreUrlFetching.java
+  Created by:Bhushan Ranjane
+  Purpose:Find the Google Play Store Url For the game.
+*/
 package com.game.gameModel;
 
 import java.io.IOException;
@@ -15,13 +20,13 @@ import org.jsoup.select.Elements;
 
 public class PlayStoreUrlFetching {
 	
-	Logger logger=Logger.getLogger(PlayStoreUrlFetching.class);
+	Logger logger=Logger.getLogger("URLFETCHING");
 	//find the play store for the game
 	public String findUrl(String gname)
 	{
 		try {
 			String eurl=encodeUrl(gname);
-			Document doc=Jsoup.connect(eurl).userAgent("Chrome/50.0.2661.94").timeout(10000).get();
+			Document doc=Jsoup.connect(eurl).userAgent("Chrome/50.0.2661.94").ignoreHttpErrors(true).timeout(10000).get();
 			Elements links=doc.select("a[href]");
 			for (Element link : links) {
 				//Get an absolute URL from a URL attribute that may be relative

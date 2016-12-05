@@ -1,3 +1,8 @@
+/*
+  File name:PlayStoreGameSuggesstion.java
+  Created by:Bhushan Ranjane
+  Purpose:Scrapping of Suggested Games data from Google Play Store .
+*/
 package com.game.gameModel;
 
 import java.util.ArrayList;
@@ -14,39 +19,31 @@ import com.game.gameDto.SuggestInfo;
 
 public class PlayStoreGameSuggesstion {
 
-	Logger logger = Logger.getLogger(PlayStoreGameSuggesstion.class);
+	Logger logger = Logger.getLogger("SUGGESTION");
 	PlayStoreUrlFetching playStoreUrl = new PlayStoreUrlFetching();
-	List<String> jsonData = new ArrayList<String>();
 	RedisImpl redisImpl = new RedisImpl();
 
 	public List<SuggestInfo> getGameSuggesstion(GameInfo gameInfo) {
 
-		String gameUrl;
-		String packName;
-		String image;
-		String flag;
-		String rating;
-		String iurl;
-		String packageId;
-		/*
-		 * String urlpattern="https://play.google.com/store/apps/similar?id=";
-		 * String similarUrl=urlpattern.concat(gameInfo.getPackageName());
-		 */
-		/* System.out.println(similarUrl); */
-		
+		String gameUrl;//Suggested game Url
+		String packName;//Suggested game package name
+		String image;//Suggested image url
+		String flag;//Indicates Paid or unpaid game
+		String rating;//Suggested game Rating
+		String iurl;//Suggested Game image Url
+		String packageId;//Suggested game package id
 
-		ArrayList<String> imageinfo = new ArrayList<String>();
-		ArrayList<String> games = new ArrayList<String>();
-		List<SuggestInfo> gameSuggestion=new ArrayList<SuggestInfo>(); 
+		ArrayList<String> imageinfo = new ArrayList<String>();//Contains Image Info
+		ArrayList<String> games = new ArrayList<String>();//Contains Game Name
+		List<SuggestInfo> gameSuggestion=new ArrayList<SuggestInfo>(); //List of suggested Game
 	
 		try {
+			//Url For Similar games Page
 			String urlpattern = "https://play.google.com/store/apps/similar?id=";
 			String similarUrl = urlpattern.concat(gameInfo.getPackageName());
 			Document doc = Jsoup.connect(similarUrl).userAgent("Chrome/50.0.2661.94").timeout(10000).get();
 
-			/******************
-			 * Scraping of Suggestion game started here
-			 *********************/
+			/******************* Scraping of Suggestion game started here*********************/
 
 			// get the titles of the suggested game
 			Elements e = doc.select("div.cards.id-card-list");
@@ -115,9 +112,11 @@ public class PlayStoreGameSuggesstion {
 
 			// contains all the details of the game
 			for (int j = 0; j < games.size(); j++) {
+				
 				SuggestInfo suggesstion = new SuggestInfo();
+				
 				String baseGameId = gameInfo.getPackageId();
-				/* suggestion = new SuggestInfo(); */
+			
 				gameUrl = playStoreUrl.findUrl(games.get(j));
 				packName = gameUrl.substring(gameUrl.indexOf("id=") + 3);
 				packageId = Integer.toString(packName.hashCode() & Integer.MAX_VALUE);
@@ -136,6 +135,7 @@ public class PlayStoreGameSuggesstion {
 				suggesstion.setBaseGameId(baseGameId);
 				suggesstion.setPackageid(packageId);
 
+				logger.info(suggesstion.getGameName());
 				if (!flag.equals("Free")) {
 					suggesstion.setGameCost(cost);
 				} else
@@ -147,13 +147,11 @@ public class PlayStoreGameSuggesstion {
 			}
 
 		} catch (Exception e) {
+			
 
 			logger.info("Url Not Found .Enter Proper Game Name");
 		}
-		/*List<SuggestInfo> gameSuggestion = new ArrayList<SuggestInfo>(suggested);
-		 gameSuggestion.add(suggested); 
-		suggested.forEach(x -> System.out.println("suggested" + x.getGameName()));
-		gameSuggestion.forEach(x -> System.out.println("-*********sugg********" + x.getGameName()));*/
+		
 		return gameSuggestion;
 
 	}

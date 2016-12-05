@@ -1,3 +1,8 @@
+/*
+  File name:DataController.java
+  Created by:Bhushan Ranjane
+  Purpose:Controls the Gaming operations .
+*/
 package com.game.gameController;
 
 import java.util.HashMap;
@@ -17,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.game.gameDao.GameSuggestionDao;
 import com.game.gameDao.GameSuggestionDaoImpl;
 import com.game.gameDao.RedisImpl;
+import com.game.gameDao.RedisInterface;
 import com.game.gameDto.GameInfo;
 import com.game.gameDto.SuggestInfo;
 import com.game.gameModel.PlayStoreDataFetching;
@@ -27,19 +34,18 @@ import com.game.gameModel.PlayStoreUrlFetching;
 @EnableWebMvc
 @RestController
 public class DataController {
-	Logger logger = Logger.getLogger(DataController.class);
+	Logger logger = Logger.getLogger("CONTROLLER");
 
 	PlayStoreUrlFetching gameUrl = new PlayStoreUrlFetching();
 	PlayStoreDataFetching gameData = new PlayStoreDataFetching();
 	PlayStoreGameSuggesstion suggestGame = new PlayStoreGameSuggesstion();
 	
-
-	/*SuggestInfo suggestion1 = new SuggestInfo();*/
-	/* ArrayList<String> gamelist=new ArrayList<String>(); */
-
 	@Autowired
-	GameSuggestionDaoImpl gameDao;
+	GameSuggestionDao gameDao;
 	
+	@Autowired
+	RedisInterface redisImpl;
+		
 
 	@RequestMapping(value = "homepage", method = RequestMethod.POST)
 	public ModelAndView gameDetails(String gameName) {
@@ -49,7 +55,7 @@ public class DataController {
 			return new ModelAndView("error");
 		}
 		Map<String, Object> model = new HashMap<String, Object>();
-		if (gameDao.isExist(gameName.toUpperCase())) {
+		if (gameDao.isExist(gameName)) {
 			System.out.println("Game exist");
 
 			List<GameInfo> game = gameDao.gameDetails(gameName);
@@ -87,9 +93,9 @@ public class DataController {
 
 	}
 	@RequestMapping(value="/test",method=RequestMethod.POST)
-	public String test(@RequestParam("gameName") String gameName){
-		System.out.println("game name"+gameName);
-		return gameName;
+	public String test(@RequestParam("gameName") SuggestInfo info){
+		String test1=redisImpl.toJson(info);
+		return test1;
 	}
 
 }

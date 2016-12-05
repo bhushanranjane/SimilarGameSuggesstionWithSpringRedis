@@ -1,3 +1,8 @@
+/*
+  File name:GameSuggestionDao.java
+  Created by:Bhushan Ranjane
+  Purpose:Interface that requires for hibernate connection .
+*/
 package com.game.gameDao;
 
 import java.util.List;
