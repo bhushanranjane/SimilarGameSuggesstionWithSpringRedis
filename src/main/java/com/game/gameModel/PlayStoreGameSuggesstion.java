@@ -99,7 +99,7 @@ public class PlayStoreGameSuggesstion {
 			}
 
 			// Checks wheather the game is paid or free
-			Elements status = doc.getElementsByClass("id-track-impression");
+		/*	Elements status = doc.getElementsByClass("id-track-impression");
 			String charge = status.text();
 			String cost = null;
 			if (charge.startsWith("₹")) {
@@ -109,13 +109,23 @@ public class PlayStoreGameSuggesstion {
 			} else {
 				flag = "Free";
 			}
-
+*/
+			Elements status=doc.getElementsByClass("subtitle-container").select("[class=price-container]");
+			
+			String Charge=status.text();
+			String abc[]=Charge.split("1 ");
+			System.out.println("===="+abc[1]);
+			
+			System.out.println("========"+Charge);
+			
 			// contains all the details of the game
 			for (int j = 0; j < games.size(); j++) {
 				
 				SuggestInfo suggesstion = new SuggestInfo();
 				
 				String baseGameId = gameInfo.getPackageId();
+				
+				String cost=abc[j+1];
 			
 				gameUrl = playStoreUrl.findUrl(games.get(j));
 				packName = gameUrl.substring(gameUrl.indexOf("id=") + 3);
@@ -134,14 +144,13 @@ public class PlayStoreGameSuggesstion {
 				suggesstion.setGameRating(gameRating.get(j));
 				suggesstion.setBaseGameId(baseGameId);
 				suggesstion.setPackageid(packageId);
-
-				logger.info(suggesstion.getGameName());
-				if (!flag.equals("Free")) {
-					suggesstion.setGameCost(cost);
-				} else
-					suggesstion.setGameCost("Free");
+				suggesstion.setGameCost(cost);
 				
-				redisImpl.redisData(suggesstion);
+				logger.info(suggesstion.getGameName());
+				System.out.println(suggesstion.getGameName());
+				System.out.println(suggesstion.getGameCost());
+
+				//redisImpl.redisData(suggesstion);
 				gameSuggestion.add(suggesstion);
 
 			}
