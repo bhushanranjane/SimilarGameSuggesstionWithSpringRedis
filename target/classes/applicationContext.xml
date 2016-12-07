@@ -13,30 +13,27 @@
 	<context:component-scan base-package="com.game.gameController"></context:component-scan>
 
 	<!-- Configure JDBC Connection -->
-	<!-- <bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/gameSuggestion" />
-		<property name="username" value="root" />
-		<property name="password" value="bridgeit" />
-	</bean> -->
-	<!-- <bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-			<property name="driverClassName" value="org.postgresql.Driver" />
-			<property name="url" value="jdbc:postgresql://localhost:5432/SimilarGame" />
-			<property name="username" value="postgres" />
-			<property name="password" value="postgres" />
-	</bean>
-	 -->
-	<!-- Configure Postgres Connection for heroku -->	
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> <property 
+		name="url" value="jdbc:mysql://localhost:3306/gameSuggestion" /> <property 
+		name="username" value="root" /> <property name="password" value="bridgeit" 
+		/> </bean> -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="org.postgresql.Driver" /> <property 
+		name="url" value="jdbc:postgresql://localhost:5432/SimilarGame" /> <property 
+		name="username" value="postgres" /> <property name="password" value="postgres" 
+		/> </bean> -->
+
+	<!-- Configure Postgres Connection for heroku -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-			<property name="driverClassName" value="org.postgresql.Driver" />
-			<property name="url" value="jdbc:postgres://flstvxhjecjzqt:mqQ-T7NdFPf82fdQuRzKVRWDJm@ec2-23-23-93-255.compute-1.amazonaws.com:5432/dbli6vbtj32sce?user=flstvxhjecjzqt&amp;password=mqQ-T7NdFPf82fdQuRzKVRWDJm&amp;sslmode=require"/>
-			<property name="username" value="flstvxhjecjzqt" />
-			<property name="password" value="mqQ-T7NdFPf82fdQuRzKVRWDJm" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgres://gouswxlsryuxnh:NUhM1Zutu21cZThhAa-Nl6JEpg@ec2-79-125-24-188.eu-west-1.compute.amazonaws.com:5432/dab8mseqe8cft3?user=gouswxlsryuxnh&amp;password=NUhM1Zutu21cZThhAa-Nl6JEpg&amp;sslmode=require" />
+		<property name="username" value="gouswxlsryuxnh" />
+		<property name="password" value="NUhM1Zutu21cZThhAa-Nl6JEpg" />
 	</bean>
-	
+
 
 	<!-- Configure Redis Connection -->
 	<bean id="jedisConnectionFactory"
@@ -44,9 +41,8 @@
 		p:host-name="server" p:port="6379" />
 
 	<!-- Configure Redis Template -->
-	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-		<property name="connectionFactory" ref="redisConnectionFactory" />
-	</bean> -->
+	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"> 
+		<property name="connectionFactory" ref="redisConnectionFactory" /> </bean> -->
 
 	<!-- Configure Hibernate 4 Session Facotry -->
 	<bean id="sessionFactory"
