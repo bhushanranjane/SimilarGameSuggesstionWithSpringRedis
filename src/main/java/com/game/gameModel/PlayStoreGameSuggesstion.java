@@ -147,10 +147,9 @@ public class PlayStoreGameSuggesstion {
 				suggesstion.setGameCost(cost);
 				
 				logger.info(suggesstion.getGameName());
-				System.out.println(suggesstion.getGameName());
-				System.out.println(suggesstion.getGameCost());
+			
 
-				//redisImpl.redisData(suggesstion);
+				redisImpl.redisData(suggesstion);
 				gameSuggestion.add(suggesstion);
 
 			}

@@ -1,0 +1,12 @@
+com/game/gameDto/GameInfo.class
+com/game/gameDao/RedisInterface.class
+com/game/gameDto/SuggestInfo.class
+com/game/gameDao/RedisImpl$1.class
+com/game/gameDao/GameSuggestionDaoImpl.class
+com/game/gameModel/PlayStoreDataFetching.class
+com/game/gameController/FileController.class
+com/game/gameDao/GameSuggestionDao.class
+com/game/gameModel/PlayStoreUrlFetching.class
+com/game/gameModel/PlayStoreGameSuggesstion.class
+com/game/gameController/DataController.class
+com/game/gameDao/RedisImpl.class

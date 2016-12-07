@@ -1,0 +1,11 @@
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameModel/PlayStoreDataFetching.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameDto/SuggestInfo.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameController/DataController.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameDao/RedisImpl.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameModel/PlayStoreGameSuggesstion.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameDao/RedisInterface.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameDao/GameSuggestionDao.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameDao/GameSuggestionDaoImpl.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameDto/GameInfo.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameController/FileController.java
+/home/bridgeit/SimilarGameDataFetching/SimilarGameSuggestionWithRedis/src/main/java/com/game/gameModel/PlayStoreUrlFetching.java
