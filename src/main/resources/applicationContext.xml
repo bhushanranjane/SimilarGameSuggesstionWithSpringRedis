@@ -38,11 +38,28 @@
 	<!-- Configure Redis Connection -->
 	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="server" p:port="6379" />
+		p:host-name="redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com" p:port="10179" />
+		
+		
+    <!--  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+      p:connection-factory-ref="jeidsConnectionFactory" /> -->
+
+
 
 	<!-- Configure Redis Template -->
 	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"> 
 		<property name="connectionFactory" ref="redisConnectionFactory" /> </bean> -->
+		
+	<!-- 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com" />
+        <constructor-arg index="2" value="10179" />
+        <constructor-arg index="3" value="Protocol.DEFAULT_TIMEOUT" />
+        <constructor-arg index="4" value="211sjcet2027" />
+    </bean>
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+</bean> -->
 
 	<!-- Configure Hibernate 4 Session Facotry -->
 	<bean id="sessionFactory"

@@ -13,40 +13,55 @@
 	<context:component-scan base-package="com.game.gameController"></context:component-scan>
 
 	<!-- Configure JDBC Connection -->
-	<!-- <bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/gameSuggestion" />
-		<property name="username" value="root" />
-		<property name="password" value="bridgeit" />
-	</bean> -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> <property 
+		name="url" value="jdbc:mysql://localhost:3306/gameSuggestion" /> <property 
+		name="username" value="root" /> <property name="password" value="bridgeit" 
+		/> </bean> -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="org.postgresql.Driver" /> <property 
+		name="url" value="jdbc:postgresql://localhost:5432/SimilarGame" /> <property 
+		name="username" value="postgres" /> <property name="password" value="postgres" 
+		/> </bean> -->
+
+	<!-- Configure Postgres Connection for heroku -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-			<property name="driverClassName" value="org.postgresql.Driver" />
-			<property name="url" value="jdbc:postgresql://localhost:5432/SimilarGame" />
-			<property name="username" value="postgres" />
-			<property name="password" value="postgres" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgres://gouswxlsryuxnh:NUhM1Zutu21cZThhAa-Nl6JEpg@ec2-79-125-24-188.eu-west-1.compute.amazonaws.com:5432/dab8mseqe8cft3?user=gouswxlsryuxnh&amp;password=NUhM1Zutu21cZThhAa-Nl6JEpg&amp;sslmode=require" />
+		<property name="username" value="gouswxlsryuxnh" />
+		<property name="password" value="NUhM1Zutu21cZThhAa-Nl6JEpg" />
 	</bean>
-	
-	<!-- Configure Postgres Connection for heroku -->	
-<!-- 	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-			<property name="driverClassName" value="org.postgresql.Driver" />
-			<property name="url" value="jdbc:postgresql://ec2-54-243-229-49.compute-1.amazonaws.com:5432/d3sesod0fme70r?user=lwrylyowvmpahi&amp;password=FCb1qBYf36DL_t8KfFQocQtScG&amp;sslmode=require"/>
-			<property name="username" value="lwrylyowvmpahi" />
-			<property name="password" value="FCb1qBYf36DL_t8KfFQocQtScG" />
-	</bean> -->
-	
+
 
 	<!-- Configure Redis Connection -->
 	<bean id="jedisConnectionFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:host-name="server" p:port="6379" />
+		p:host-name="redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com" p:port="10179" />
+		
+		
+     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+      p:connection-factory-ref="jeidsConnectionFactory" />
+
+     <bean id="redisImpl" class="com.self.common.api.poc.ImageRepository">
+      <property name="redisTemplate" ref="redisTemplate"/>
+     </bean>
 
 	<!-- Configure Redis Template -->
-	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-		<property name="connectionFactory" ref="redisConnectionFactory" />
-	</bean> -->
+	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"> 
+		<property name="connectionFactory" ref="redisConnectionFactory" /> </bean> -->
+		
+	<!-- 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com" />
+        <constructor-arg index="2" value="10179" />
+        <constructor-arg index="3" value="Protocol.DEFAULT_TIMEOUT" />
+        <constructor-arg index="4" value="211sjcet2027" />
+    </bean>
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+</bean> -->
 
 	<!-- Configure Hibernate 4 Session Facotry -->
 	<bean id="sessionFactory"
@@ -71,5 +86,5 @@
 
 	<!-- class beans -->
 	<bean id="gameDao" class="com.game.gameDao.GameSuggestionDaoImpl"></bean>
-	<bean id="redisImpl" class="com.game.gameDao.RedisImpl"></bean>
+	<!-- <bean id="redisImpl" class="com.game.gameDao.RedisImpl"></bean> -->
 </beans>

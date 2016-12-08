@@ -31,6 +31,9 @@ import com.game.gameDto.SuggestInfo;
 import com.game.gameModel.PlayStoreDataFetching;
 import com.game.gameModel.PlayStoreGameSuggesstion;
 import com.game.gameModel.PlayStoreUrlFetching;
+
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 @EnableWebMvc
 @RestController
 public class DataController {
@@ -45,7 +48,6 @@ public class DataController {
 	
 	@Autowired
 	RedisInterface redisImpl;
-		
 
 	@RequestMapping(value = "homepage", method = RequestMethod.POST)
 	public ModelAndView gameDetails(String gameName) {

@@ -24,7 +24,8 @@ import redis.clients.jedis.Jedis;
 
 public class GameSuggestionDaoImpl implements GameSuggestionDao {
 	Logger logger=Logger.getLogger("GAMESUGGESTIONDAOIMPL");
-	static final Jedis redisConnect=new Jedis("localhost");
+	final static Jedis redisConnect = new Jedis("redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com",10179);
+	
 	
 	@Autowired
 	SessionFactory sessionFactory;

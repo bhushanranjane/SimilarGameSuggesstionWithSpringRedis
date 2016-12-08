@@ -25,7 +25,8 @@ public class RedisImpl implements RedisInterface{
 
 	Logger logger=Logger.getLogger("REDISIMPL");
 	PlayStoreDataFetching playStoreDataFetching = new PlayStoreDataFetching();	
-	final static Jedis redisConnect = new Jedis("localhost");
+	final static Jedis redisConnect = new Jedis("redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com",10179);
+
 	static Gson gson = new Gson();
 
 	public void redisData(SuggestInfo info) {
@@ -47,8 +48,11 @@ public class RedisImpl implements RedisInterface{
 
 		// redis data with base game as key
 		String baseGameId = info.getBaseGameId().substring(0, 3);
+		
+		
 		redisConnect.hset("GameId:-" + baseGameId, "Package Id:-" + info.getPackageid(),
 				"Game Suggestion:-" + suggestedGames.toString());
+	
 
 	
 		List<String> jsonData = redisConnect.hmget("Game Key:" + info.getBaseGameId().substring(0, 3),
@@ -73,6 +77,7 @@ public class RedisImpl implements RedisInterface{
 		record.add(packageId);
 		String packageIdString = null;
 		packageIdString = gson.toJson(record);
+		
 		redisConnect.hset("Game Key:" + baseGameId.substring(0, 3), baseGameId, packageIdString);
 	}
 	
@@ -84,4 +89,5 @@ public class RedisImpl implements RedisInterface{
 		
 	}
 
+	
 }
