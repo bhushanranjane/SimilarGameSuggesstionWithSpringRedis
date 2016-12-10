@@ -13,11 +13,12 @@
 	<context:component-scan base-package="com.game.gameController"></context:component-scan>
 
 	<!-- Configure JDBC Connection -->
-	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> <property 
 		name="url" value="jdbc:mysql://localhost:3306/gameSuggestion" /> <property 
 		name="username" value="root" /> <property name="password" value="bridgeit" 
-		/> </bean> -->
+		/> </bean>
+		
 	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
 		<property name="driverClassName" value="org.postgresql.Driver" /> <property 
 		name="url" value="jdbc:postgresql://localhost:5432/SimilarGame" /> <property 
@@ -25,14 +26,13 @@
 		/> </bean> -->
 
 	<!-- Configure Postgres Connection for heroku -->
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url"
-			value="jdbc:postgres://gouswxlsryuxnh:NUhM1Zutu21cZThhAa-Nl6JEpg@ec2-79-125-24-188.eu-west-1.compute.amazonaws.com:5432/dab8mseqe8cft3?user=gouswxlsryuxnh&amp;password=NUhM1Zutu21cZThhAa-Nl6JEpg&amp;sslmode=require" />
-		<property name="username" value="gouswxlsryuxnh" />
-		<property name="password" value="NUhM1Zutu21cZThhAa-Nl6JEpg" />
-	</bean>
+		<property name="url" value="jdbc:postgres://ec2-50-19-95-47.compute-1.amazonaws.com:5432/d5pr51guqgpskl?user=lgemazpvwfgxtr&amp;password=y00Pz3RRyowgfwq5UB9cXr5xtd&amp;sslmode=require" />
+		<property name="username" value="lgemazpvwfgxtr" />
+		<property name="password" value="y00Pz3RRyowgfwq5UB9cXr5xtd" />
+	</bean> -->
 
 
 	<!-- Configure Redis Connection -->
@@ -41,12 +41,10 @@
 		p:host-name="redis-10179.c11.us-east-1-2.ec2.cloud.redislabs.com" p:port="10179" />
 		
 		
-     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-      p:connection-factory-ref="jeidsConnectionFactory" />
+    <!--  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+      p:connection-factory-ref="jeidsConnectionFactory" /> -->
 
-     <bean id="redisImpl" class="com.self.common.api.poc.ImageRepository">
-      <property name="redisTemplate" ref="redisTemplate"/>
-     </bean>
+
 
 	<!-- Configure Redis Template -->
 	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"> 
@@ -72,6 +70,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop> -->
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
@@ -86,5 +85,5 @@
 
 	<!-- class beans -->
 	<bean id="gameDao" class="com.game.gameDao.GameSuggestionDaoImpl"></bean>
-	<!-- <bean id="redisImpl" class="com.game.gameDao.RedisImpl"></bean> -->
+	<bean id="redisImpl" class="com.game.gameDao.RedisImpl"></bean>
 </beans>

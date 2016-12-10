@@ -77,27 +77,5 @@ public class DataController {
 			model.put("suggestion", suggestion);
 			return new ModelAndView("gameDetails", "model", model);
 		}
-		/*
-		 * else {
-		 * 
-		 * String url = gameUrl.findUrl(gameName); gameInfo =
-		 * gameData.getPlaystoreData(url); gameDao.saveGame(gameInfo);
-		 * List<GameInfo> game = gameDao.getGameByName(gameName); for (int i =
-		 * 0; i < game.size(); i++) { System.out.println("game list:-" +
-		 * game.get(i).getGameName()); } SuggestInfo suggestion1 =
-		 * suggestGame.getGameSuggesstion(gameInfo); for (SuggestInfo
-		 * suggestInfo : suggestion1) { gameDao.saveSuggestion(suggestInfo);
-		 * List<SuggestInfo> suggestion = gameDao.gameSuggest();
-		 * model.put("game", game); model.put("suggestion", suggestion);
-		 * 
-		 * } }
-		 */
-
 	}
-	@RequestMapping(value="/test",method=RequestMethod.POST)
-	public String test(@RequestParam("gameName") SuggestInfo info){
-		String test1=redisImpl.toJson(info);
-		return test1;
-	}
-
 }

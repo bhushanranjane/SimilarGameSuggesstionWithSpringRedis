@@ -18,7 +18,7 @@ public interface RedisInterface {
 	
 	public void addData(Set<String> record, String baseGameId, String packageId);
 	
-	public String toJson(SuggestInfo info);
+/*	public String toJson(SuggestInfo info);*/
 	
 	
 }
